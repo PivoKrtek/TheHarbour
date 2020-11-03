@@ -79,15 +79,15 @@ namespace TheHabourProject
                 foreach (var boat in b2)
                 {
                     if (boat is SailingBoat)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour-1}\tSegelbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaxKmPerHour} km/h  \t{((SailingBoat)boat).BoatLenghtInMeter} m lång\n"); }
+                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour-1}\tSegelbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((SailingBoat)boat).BoatLenghtInMeter} m lång\n"); }
                     else if (boat is Catamaran)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tKatamaran\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaxKmPerHour} km/h  \t{((Catamaran)boat).NumberOfBedsInBoat} sängar ombord\n"); }
+                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tKatamaran\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((Catamaran)boat).NumberOfBedsInBoat} sängar ombord\n"); }
                     else if (boat is CargoShip)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tLastfartyg\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaxKmPerHour} km/h  \t{((CargoShip)boat).NumberOfContainersOnTheShip} containers ombord\n"); }
+                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tLastfartyg\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((CargoShip)boat).NumberOfContainersOnTheShip} containers ombord\n"); }
                     else if (boat is RowingBoat)
-                    { info.Add($"{boat.PlaceAtWharf}\tRoddbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaxKmPerHour} km/h  \tMax {((RowingBoat)boat).MaximumPassengers} st passagerare\n"); }
+                    { info.Add($"{boat.PlaceAtWharf}\tRoddbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \tMax {((RowingBoat)boat).MaximumPassengers} st passagerare\n"); }
                     else if (boat is MotorBoat)
-                    { info.Add($"{boat.PlaceAtWharf}\tMotorbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaxKmPerHour} km/h  \t{((MotorBoat)boat).NumberOfHorsepower} hästkrafter\n"); }
+                    { info.Add($"{boat.PlaceAtWharf}\tMotorbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((MotorBoat)boat).NumberOfHorsepower} hästkrafter\n"); }
                 }
             }
             else if (choice == 2)
@@ -97,15 +97,15 @@ namespace TheHabourProject
                 foreach (var boat in b2)
                 {
                     if (boat is SailingBoat)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tSegelbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaxKmPerHour} km/h  \t{((SailingBoat)boat).BoatLenghtInMeter} m lång\n"); }
+                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tSegelbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((SailingBoat)boat).BoatLenghtInMeter} m lång\n"); }
                     else if (boat is Catamaran)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tKatamaran\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaxKmPerHour} km/h  \t{((Catamaran)boat).NumberOfBedsInBoat} {(((Catamaran)boat).NumberOfBedsInBoat > 0 ? "sängar" : "säng")} ombord\n"); }
+                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tKatamaran\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((Catamaran)boat).NumberOfBedsInBoat} {(((Catamaran)boat).NumberOfBedsInBoat > 0 ? "sängar" : "säng")} ombord\n"); }
                     else if (boat is CargoShip)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tLastfartyg\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaxKmPerHour} km/h  \t{((CargoShip)boat).NumberOfContainersOnTheShip} containers ombord\n"); }
+                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tLastfartyg\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((CargoShip)boat).NumberOfContainersOnTheShip} containers ombord\n"); }
                     else if (boat is RowingBoat)
-                    { info.Add($"{boat.PlaceAtWharf}\tRoddbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaxKmPerHour} km/h  \tMax {((RowingBoat)boat).MaximumPassengers} st passagerare\n"); }
+                    { info.Add($"{boat.PlaceAtWharf}\tRoddbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \tMax {((RowingBoat)boat).MaximumPassengers} st passagerare\n"); }
                     else if (boat is MotorBoat)
-                    { info.Add($"{boat.PlaceAtWharf}\tMotorbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaxKmPerHour} km/h  \t{((MotorBoat)boat).NumberOfHorsepower} hästkrafter\n"); }
+                    { info.Add($"{boat.PlaceAtWharf}\tMotorbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((MotorBoat)boat).NumberOfHorsepower} hästkrafter\n"); }
                 }
             }
 

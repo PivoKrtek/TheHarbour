@@ -14,7 +14,7 @@ namespace TheHabourProject
             Random random = new Random();
             IdentityNumber = Boat.GetIdentityNumber("K-");
             Weight = random.Next(1200, 8001);
-            MaxKmPerHour = Converter.KnotToKmPerHr(random.Next(1, 13));
+            MaximumSpeed = Converter.KnotToKmPerHr(random.Next(1, 13));
             DaysLeftToStayInHarbour = 3;
             NumberOfBedsInBoat = random.Next(1, 5);
             PlaceAtWharf = 0;
@@ -25,7 +25,7 @@ namespace TheHabourProject
         {
             IdentityNumber = stringArrayFromFile[0];
             Weight = int.Parse(stringArrayFromFile[1]);
-            MaxKmPerHour = double.Parse(stringArrayFromFile[2]);
+            MaximumSpeed = double.Parse(stringArrayFromFile[2]);
             DaysLeftToStayInHarbour = int.Parse(stringArrayFromFile[3]);
             NumberOfBedsInBoat = int.Parse(stringArrayFromFile[4]);
             PlaceAtWharf = int.Parse(stringArrayFromFile[5]);

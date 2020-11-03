@@ -23,7 +23,7 @@ namespace TheHabourProject
         public static double AverageKmPerHour()
         {
             var b1 = Harbour.BoatsInHarbour
-                .Select(b => b.MaxKmPerHour)
+                .Select(b => b.MaximumSpeed)
                 .Sum();
             return Math.Round(b1 / Harbour.BoatsInHarbour.Count(), 1);
         }

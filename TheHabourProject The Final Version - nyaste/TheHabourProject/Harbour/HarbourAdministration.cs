@@ -85,7 +85,7 @@ namespace TheHabourProject
             sw.WriteLine($"{Counter.DaysSinceStartOfSimulation};{Counter.NumberOfDeclinedBoatsSinceStartOfSimulation}");
             foreach (var boat in boatsInHarbour)
             {
-                string s = $"{boat.IdentityNumber};{boat.Weight};{boat.MaxKmPerHour};{boat.DaysLeftToStayInHarbour};";
+                string s = $"{boat.IdentityNumber};{boat.Weight};{boat.MaximumSpeed};{boat.DaysLeftToStayInHarbour};";
                 if (boat is RowingBoat)
                 { s += $"{((RowingBoat)boat).MaximumPassengers};{((RowingBoat)boat).PlaceAtWharf}"; }
                 else if (boat is MotorBoat)

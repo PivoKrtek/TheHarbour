@@ -12,7 +12,7 @@ namespace TheHabourProject
         public string BoatType { get; set; }
         public string IdentityNumber { get; set; }
         public int Weight { get; set; }
-        public double MaxKmPerHour { get; set; }
+        public double MaximumSpeed { get; set; }
         public int DaysLeftToStayInHarbour { get; set; }
         public int PlaceAtWharf { get; set; }
         public int NumberOfWharfPlacesNeededAtHarbour { get; set; }
