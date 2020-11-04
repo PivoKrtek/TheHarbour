@@ -92,7 +92,9 @@ namespace TheHabourProject
             {
                 value2 = 2 - value2;
             }
-            if (value <= value2)
+            if (value == 1 && value2 == 1)
+            { return 0.9; }
+            else if (value <= value2)
             { return value; }
             return value2;
         }
