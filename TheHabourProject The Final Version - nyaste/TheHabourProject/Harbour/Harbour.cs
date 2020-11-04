@@ -10,21 +10,20 @@ namespace TheHabourProject
 {
     public static class Harbour
     {
-        public static List<DockPlace> WharfPlacesInHarbour { get; set; }
+        public static List<WharfPlace> WharfPlacesInHarbour { get; set; }
 
         public static List<Boat> BoatsInHarbour { get; set; }
 
-        public static List<FreeDockPlace> FreeWharfPlacesInHarbour { get; set; }
+       
 
         public static void CreateWharfPlacesInHArbour()
         {
-            WharfPlacesInHarbour = new List<DockPlace>();
+            WharfPlacesInHarbour = new List<WharfPlace>();
             for (int i = 1; i < 65; i++)
             {
-                WharfPlacesInHarbour.Add(new DockPlace(i));
+                WharfPlacesInHarbour.Add(new WharfPlace(i));
             }
         }
-        
         public static void DecreaseDaysLeftForBoatsAtWharf()
         {
             foreach (var wharfPlace in Harbour.WharfPlacesInHarbour)
@@ -65,50 +64,26 @@ namespace TheHabourProject
         public static List<string> PrintHarbourInfo(int choice)
         {
             List<string> info = new List<string>();
-            
+
             info.Add($"Plats\tBåttyp\t\tBåt-ID\tVikt\t Maxhastighet\tÖvrigt\n");
-                       
+
             var b1 = Harbour.BoatsInHarbour
-                    .OrderBy(b => b.PlaceAtWharf);
+                    .OrderBy(b => b.PlaceAtWharf)
+                    .Where(b => (choice == 1 ? b.PlaceAtWharf < 33 : b.PlaceAtWharf > 32));
 
-            
-            if (choice == 1)
+            foreach (var boat in b1)
             {
-                var b2 = b1
-                      .Where(b => b.PlaceAtWharf < 33);
-                foreach (var boat in b2)
-                {
-                    if (boat is SailingBoat)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour-1}\tSegelbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((SailingBoat)boat).BoatLenghtInMeter} m lång\n"); }
-                    else if (boat is Catamaran)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tKatamaran\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((Catamaran)boat).NumberOfBedsInBoat} sängar ombord\n"); }
-                    else if (boat is CargoShip)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tLastfartyg\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((CargoShip)boat).NumberOfContainersOnTheShip} containers ombord\n"); }
-                    else if (boat is RowingBoat)
-                    { info.Add($"{boat.PlaceAtWharf}\tRoddbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \tMax {((RowingBoat)boat).MaximumPassengers} st passagerare\n"); }
-                    else if (boat is MotorBoat)
-                    { info.Add($"{boat.PlaceAtWharf}\tMotorbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((MotorBoat)boat).NumberOfHorsepower} hästkrafter\n"); }
-                }
+                if (boat is SailingBoat)
+                { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tSegelbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((SailingBoat)boat).BoatLenghtInMeter} m lång\n"); }
+                else if (boat is Catamaran)
+                { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tKatamaran\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((Catamaran)boat).NumberOfBedsInBoat} sängar ombord\n"); }
+                else if (boat is CargoShip)
+                { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tLastfartyg\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((CargoShip)boat).NumberOfContainersOnTheShip} containers ombord\n"); }
+                else if (boat is RowingBoat)
+                { info.Add($"{boat.PlaceAtWharf}\tRoddbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \tMax {((RowingBoat)boat).MaximumPassengers} st passagerare\n"); }
+                else if (boat is MotorBoat)
+                { info.Add($"{boat.PlaceAtWharf}\tMotorbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((MotorBoat)boat).NumberOfHorsepower} hästkrafter\n"); }
             }
-            else if (choice == 2)
-            {
-                var b2 = b1
-                    .Where(b => b.PlaceAtWharf > 32);
-                foreach (var boat in b2)
-                {
-                    if (boat is SailingBoat)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tSegelbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((SailingBoat)boat).BoatLenghtInMeter} m lång\n"); }
-                    else if (boat is Catamaran)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tKatamaran\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((Catamaran)boat).NumberOfBedsInBoat} {(((Catamaran)boat).NumberOfBedsInBoat > 0 ? "sängar" : "säng")} ombord\n"); }
-                    else if (boat is CargoShip)
-                    { info.Add($"{boat.PlaceAtWharf}-{boat.PlaceAtWharf + boat.NumberOfWharfPlacesNeededAtHarbour - 1}\tLastfartyg\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((CargoShip)boat).NumberOfContainersOnTheShip} containers ombord\n"); }
-                    else if (boat is RowingBoat)
-                    { info.Add($"{boat.PlaceAtWharf}\tRoddbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \tMax {((RowingBoat)boat).MaximumPassengers} st passagerare\n"); }
-                    else if (boat is MotorBoat)
-                    { info.Add($"{boat.PlaceAtWharf}\tMotorbåt\t\t{boat.IdentityNumber}\t{boat.Weight} kg\t  {boat.MaximumSpeed} km/h  \t{((MotorBoat)boat).NumberOfHorsepower} hästkrafter\n"); }
-                }
-            }
-
             return info;
         }
     }

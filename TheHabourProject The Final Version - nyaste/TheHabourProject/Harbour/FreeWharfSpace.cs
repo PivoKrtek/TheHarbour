@@ -3,21 +3,20 @@ using System.Linq;
 
 namespace TheHabourProject
 {
-    public class FreeDockPlace
+    public class FreeWharfSpace
     {
         public int StartPosition { get; set; }
         public int LenghtOfFreePlaces { get; set; }
-        public int DaysLeftBeforeFree { get; set; }
-        public int DaysLeftAfterFree { get; set; }
+        public int DaysLeftForBoatBeforeSpace { get; set; }
+        public int DaysLeftForBoatAfterSpace { get; set; }
 
-        public FreeDockPlace(int start, int lenght, int daysLeftBefore, int daysLeftAfter)
+        public FreeWharfSpace(int start, int lenght, int daysLeftBefore, int daysLeftAfter)
         {
             StartPosition = start;
             LenghtOfFreePlaces = lenght;
-            DaysLeftBeforeFree = daysLeftBefore;
-            DaysLeftAfterFree = daysLeftAfter;
+            DaysLeftForBoatBeforeSpace = daysLeftBefore;
+            DaysLeftForBoatAfterSpace = daysLeftAfter;
         }
-
         public static int WhereIsHalfPlace()
         {
             var w1 = Harbour.WharfPlacesInHarbour
@@ -34,10 +33,9 @@ namespace TheHabourProject
                 return 0;
             }
         }
-                
-        public static List<FreeDockPlace> ListOfFreeWharfPlacesInHarbour()
+        public static List<FreeWharfSpace> ListOfFreeWharfPlacesInHarbour()
         {
-            List<FreeDockPlace> lista = new List<FreeDockPlace>();
+            List<FreeWharfSpace> lista = new List<FreeWharfSpace>();
 
             for (int i = 1; i < Harbour.WharfPlacesInHarbour.Count + 1;)
             {
@@ -60,7 +58,7 @@ namespace TheHabourProject
                         }
                     }
                     
-                    lista.Add(new FreeDockPlace(i, count, DaysLeftBefore(i - 1), DaysLeftAfter(i + count)));
+                    lista.Add(new FreeWharfSpace(i, count, DaysLeftBefore(i - 1), DaysLeftAfter(i + count)));
                 }
                 if (count > 0)
                 { i += count; }

@@ -55,27 +55,27 @@ namespace TheHabourProject
         }
         public override bool IsTherePLaceForBoatInHarbour()
         {
-            int halfPlaceSpot = FreeDockPlace.WhereIsHalfPlace();
+            int halfPlaceSpot = FreeWharfSpace.WhereIsHalfPlace();
             if (halfPlaceSpot > 0)
             { return true; }
             else
             {
-                var l1 = Harbour.FreeWharfPlacesInHarbour
+                List<FreeWharfSpace> list = FreeWharfSpace.ListOfFreeWharfPlacesInHarbour();
+                var l1 = list
                 .Where(l => l.LenghtOfFreePlaces >= NumberOfWharfPlacesNeededAtHarbour)
                 .ToList();
 
                 return l1.Count() > 0;
             }
         }
-
         public override int CheckForBestPlaceInHarbour()
         {
-            int halfPlaceSpot = FreeDockPlace.WhereIsHalfPlace();
+            int halfPlaceSpot = FreeWharfSpace.WhereIsHalfPlace();
             if (halfPlaceSpot > 0)
             { return halfPlaceSpot; }
             else
             {
-                List<FreeDockPlace> list = FreeDockPlace.ListOfFreeWharfPlacesInHarbour();
+                List<FreeWharfSpace> list = FreeWharfSpace.ListOfFreeWharfPlacesInHarbour();
 
                 var q1 = list
                 .Where(q => q.LenghtOfFreePlaces >= NumberOfWharfPlacesNeededAtHarbour)

@@ -65,6 +65,7 @@ namespace TheHabourProject
             HarbourAdministration.CreatePreviousHarbourAndBoats(HarbourAdministration.ReadInformationFromFile());
             CreateAndDisplayPicturesExeptForRowingBoat();
             CreateDisplayRowingBoatPictures();
+            NumberOfBoatsPerDay.Text = Counter.NumberOfNewBoatsPerUdate.ToString();
             PrintInfoHarbour();
             PrintInfoNorthHarbour();
             PrintInfoSouthHarbor();
@@ -98,8 +99,6 @@ namespace TheHabourProject
 
                 foreach (var boat in HarbourAdministration.BoatsComingToHarbour)
                 {
-                    Harbour.FreeWharfPlacesInHarbour = FreeDockPlace.ListOfFreeWharfPlacesInHarbour();
-
                     bool placeFree = boat.IsTherePLaceForBoatInHarbour();
                     if (placeFree)
                     {
@@ -232,6 +231,17 @@ namespace TheHabourProject
             }
         }
 
-        
+        private void NumberChange(object sender, TextChangedEventArgs e)
+        {
+
+            bool input = int.TryParse(NumberOfBoatsPerDay.Text, out int numberOfBoats);
+            if (input)
+            { Counter.NumberOfNewBoatsPerUdate = numberOfBoats; }
+            else
+            { Counter.NumberOfNewBoatsPerUdate = 5;
+                NumberOfBoatsPerDay.Text = "5";
+            }
+
+        }
     }
 }

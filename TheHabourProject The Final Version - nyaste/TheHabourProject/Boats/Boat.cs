@@ -55,7 +55,7 @@ namespace TheHabourProject
         }
         public virtual int CheckForBestPlaceInHarbour()
         {
-            List<FreeDockPlace> list = FreeDockPlace.ListOfFreeWharfPlacesInHarbour();
+            List<FreeWharfSpace> list = FreeWharfSpace.ListOfFreeWharfPlacesInHarbour();
 
             var q1 = list
                 .Where(q => q.LenghtOfFreePlaces >= NumberOfWharfPlacesNeededAtHarbour)
@@ -64,14 +64,14 @@ namespace TheHabourProject
                 .ToList();
                 return q1[0];
         }
-        public int StartOrEndPosition(FreeDockPlace freeSpot)
+        public int StartOrEndPosition(FreeWharfSpace freeSpot)
         {
-            double value = freeSpot.DaysLeftBeforeFree / (double)DaysLeftToStayInHarbour;
+            double value = freeSpot.DaysLeftForBoatBeforeSpace / (double)DaysLeftToStayInHarbour;
             if (value < 1)
             {
                 value = 2 - value;
             }
-            double value2 = freeSpot.DaysLeftAfterFree / (double)DaysLeftToStayInHarbour;
+            double value2 = freeSpot.DaysLeftForBoatAfterSpace / (double)DaysLeftToStayInHarbour;
             if (value2 < 1)
             {
                 value2 = 2 - value2;
@@ -80,15 +80,14 @@ namespace TheHabourProject
             { return freeSpot.StartPosition; }
             return freeSpot.StartPosition + freeSpot.LenghtOfFreePlaces - NumberOfWharfPlacesNeededAtHarbour;
         }
-
-        public double AsCloseSameDaysLeftInHarbour(FreeDockPlace freeSpot)
+        public double AsCloseSameDaysLeftInHarbour(FreeWharfSpace freeSpot)
         {
-            double value = freeSpot.DaysLeftBeforeFree / (double)DaysLeftToStayInHarbour;
+            double value = freeSpot.DaysLeftForBoatBeforeSpace / (double)DaysLeftToStayInHarbour;
             if (value < 1)
             {
                 value = 2 - value;
             }
-            double value2 = freeSpot.DaysLeftAfterFree / (double)DaysLeftToStayInHarbour;
+            double value2 = freeSpot.DaysLeftForBoatAfterSpace / (double)DaysLeftToStayInHarbour;
             if (value2 < 1)
             {
                 value2 = 2 - value2;
@@ -97,16 +96,15 @@ namespace TheHabourProject
             { return value; }
             return value2;
         }
-
         public virtual bool IsTherePLaceForBoatInHarbour()
         {
-            var l1 = Harbour.FreeWharfPlacesInHarbour
+            List<FreeWharfSpace> list = FreeWharfSpace.ListOfFreeWharfPlacesInHarbour();
+            var l1 = list
                 .Where(l => l.LenghtOfFreePlaces >= NumberOfWharfPlacesNeededAtHarbour)
                 .ToList();
 
             return l1.Count() > 0;
         }
-
         public static string GetIdentityNumber(string initialLetter)
         {
             Random random = new Random();

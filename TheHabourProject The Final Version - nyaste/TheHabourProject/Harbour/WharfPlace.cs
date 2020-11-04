@@ -4,21 +4,22 @@ using System.Text;
 
 namespace TheHabourProject
 {
-    public class DockPlace
+    public class WharfPlace
     {
         public int Number { get; set; }
         public bool HalfPlaceFree { get; set; }
         public bool WharfPlaceFree { get; set; }
         public int DaysLeftForBoatInWharf { get; set; }
 
-        public DockPlace(int number)
+
+        public WharfPlace(int number)
         {
             Number = number;
             HalfPlaceFree = true;
             WharfPlaceFree = true;
             DaysLeftForBoatInWharf = 0;
         }
-        public DockPlace(string[] info)
+        public WharfPlace(string[] info)
         {
             Number = int.Parse(info[0]);
             HalfPlaceFree = bool.Parse(info[1]);

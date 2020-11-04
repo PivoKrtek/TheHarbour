@@ -20,7 +20,7 @@ namespace TheHabourProject
             info.Add($"I hamnen ligger nu:\n- Roddbåtar \t{Counter.GetNumberOfBoatType("R")} st\n- Motorbåtar \t{Counter.GetNumberOfBoatType("M")} st\n- Segelbåtar \t{Counter.GetNumberOfBoatType("S")} st\n- Katamaraner \t{Counter.GetNumberOfBoatType("K")} st\n- Lastfartyg \t{Counter.GetNumberOfBoatType("L")} st\n");
             info.Add($"Summan av alla båtars vikt: {Counter.TotalWeight()} kg.\n");
             info.Add($"Medelhastighet för alla båtar: {Counter.AverageKmPerHour()} km/h.\n");
-            info.Add($"Antal hela lediga platser: {Counter.GetNumberOfFreeSpots()} st\nAntal lediga halvplatser (för roddbåt): {(FreeDockPlace.WhereIsHalfPlace() > 0 ? "1" : "0")} st.\n");
+            info.Add($"Antal hela lediga platser: {Counter.GetNumberOfFreeSpots()} st\nAntal lediga halvplatser (för roddbåt): {(FreeWharfSpace.WhereIsHalfPlace() > 0 ? "1" : "0")} st.\n");
             info.Add($"Antal avvisade båtar för dagen: {Counter.NumberOfDeclinedBoatsEachDay} st\n");
             info.Add($"Antal avvisade båtar sedan simuleringens start: {Counter.NumberOfDeclinedBoatsSinceStartOfSimulation} st\nAvvisade båtar i genomsnitt per år: {Counter.DeclinedBoatsPerYear()} st/år.\n");
             if (Counter.NumberOfDeclinedBoatsEachDay > 0)
@@ -44,17 +44,18 @@ namespace TheHabourProject
 
         public static void CreatePreviousHarbourAndBoats(string[] data)
         {
-            List<DockPlace> wharfPlacesInHarbour = new List<DockPlace>();
+            List<WharfPlace> wharfPlacesInHarbour = new List<WharfPlace>();
             for (int i = 0; i < 64; i++)
             {
                 string[] splittedString = data[i].Split(';');
-                wharfPlacesInHarbour.Add(new DockPlace(splittedString));
+                wharfPlacesInHarbour.Add(new WharfPlace(splittedString));
             }
             Harbour.WharfPlacesInHarbour = wharfPlacesInHarbour;
 
             string[] splitString = data[64].Split(';');
             Counter.DaysSinceStartOfSimulation = int.Parse(splitString[0]);
             Counter.NumberOfDeclinedBoatsSinceStartOfSimulation = int.Parse(splitString[1]);
+            Counter.NumberOfNewBoatsPerUdate = int.Parse(splitString[2]);
 
             List<Boat> boatsInHarbour = new List<Boat>();
             for (int i = 65; i < data.Length; i++)
@@ -74,7 +75,7 @@ namespace TheHabourProject
             Harbour.BoatsInHarbour = boatsInHarbour;
         }
 
-        public static void WriteInformationToFile(List<DockPlace> listWharf, List<Boat> boatsInHarbour)
+        public static void WriteInformationToFile(List<WharfPlace> listWharf, List<Boat> boatsInHarbour)
         {
             
             StreamWriter sw = File.CreateText("theharbour.txt");
@@ -82,7 +83,7 @@ namespace TheHabourProject
             {
                 sw.WriteLine($"{wharf.Number};{wharf.HalfPlaceFree};{wharf.WharfPlaceFree};{wharf.DaysLeftForBoatInWharf}");
             }
-            sw.WriteLine($"{Counter.DaysSinceStartOfSimulation};{Counter.NumberOfDeclinedBoatsSinceStartOfSimulation}");
+            sw.WriteLine($"{Counter.DaysSinceStartOfSimulation};{Counter.NumberOfDeclinedBoatsSinceStartOfSimulation};{Counter.NumberOfNewBoatsPerUdate}");
             foreach (var boat in boatsInHarbour)
             {
                 string s = $"{boat.IdentityNumber};{boat.Weight};{boat.MaximumSpeed};{boat.DaysLeftToStayInHarbour};";

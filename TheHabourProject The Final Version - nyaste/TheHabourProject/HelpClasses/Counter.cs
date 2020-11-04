@@ -29,8 +29,8 @@ namespace TheHabourProject
         }
         public static int GetNumberOfFreeSpots()
         {
-            Harbour.FreeWharfPlacesInHarbour = FreeDockPlace.ListOfFreeWharfPlacesInHarbour();
-            var f1 = Harbour.FreeWharfPlacesInHarbour
+            List<FreeWharfSpace> lista = FreeWharfSpace.ListOfFreeWharfPlacesInHarbour();
+            var f1 = lista
                 .Select(f => f.LenghtOfFreePlaces)
                 .Sum();
 

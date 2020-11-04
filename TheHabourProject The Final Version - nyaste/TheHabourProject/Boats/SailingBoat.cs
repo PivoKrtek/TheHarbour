@@ -8,7 +8,6 @@ namespace TheHabourProject
     public class SailingBoat : Boat
     {
         public double BoatLenghtInMeter { get; set; }
-
         public SailingBoat()
         {
             Random random = new Random();
